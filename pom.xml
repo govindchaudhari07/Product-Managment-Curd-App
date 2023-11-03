@@ -11,6 +11,7 @@
 	<groupId>com.product</groupId>
 	<artifactId>Product-Managment-Curd-App</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
 	<name>Product-Managment-Curd-App</name>
 	<description>Spring boot curd operation</description>
 	<properties>
