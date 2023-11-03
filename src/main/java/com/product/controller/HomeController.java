@@ -26,7 +26,7 @@ public class HomeController {
 	@Autowired
 	ProductService productServ;
 
-	@GetMapping("/Springstart")
+	@GetMapping("/springstart")
 	public String welcome()
 	{
 		return "welcome hi ";
