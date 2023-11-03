@@ -25,7 +25,7 @@ public class HomeController {
 	@Autowired
 	ProductService productServ;
 
-	@RequestMapping("/")
+	@RequestMapping("/home")
 
 	public String home(Model m) {
 		System.out.println("first call");

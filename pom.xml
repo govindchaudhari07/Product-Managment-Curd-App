@@ -19,6 +19,7 @@
 		<java.version>1.8</java.version>
 	</properties>
 	<dependencies>
+	 <!--Servlet container has to be set as provided -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-tomcat</artifactId>
