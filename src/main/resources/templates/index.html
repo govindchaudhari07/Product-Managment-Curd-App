@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Orders</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+	crossorigin="anonymous">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js">
+</script>
+</head>
+<body style="background-color: #f0f1f2" onload="getdata();">
+	<!--Start Navbar  -->
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="#">Products System</a>
+			<button class="navbar-toggler" type="button"
+				data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+				aria-controls="navbarSupportedContent" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+					<li class="nav-item"><a class="nav-link active"
+						aria-current="page" href="/">Home</a></li>
+
+				</ul>
+				<form class="d-flex">
+					<input class="form-control me-2" type="search" placeholder="Search"
+						aria-label="Search">
+					<button class="btn btn-outline-success" type="submit">Search</button>
+				</form>
+			</div>
+		</div>
+	</nav>
+
+	<!-- End Navbar -->
+
+	<div class="container p-5">
+		<div class="row">
+			<div class="col-md-6 offset-md-3">
+				<div class="card">
+
+					<!-- <div th:if="${session.msg}">
+						<h5 class="text-center text-success" th:text="${session.msg}"></h5>
+						<th:block th:text="${#session.removeAttribute('msg')}"></th:block>
+					</div> -->
+
+
+					<div class="card-header">
+						<button href="load_form" class="bvtn btn-primary"
+							data-bs-toggle="modal" data-bs-target="#exampleModal">Add
+							Products</button>
+
+						<!-- bootstrap modal start for add button -->
+
+						<div class="modal fade" id="exampleModal" tabindex="-1"
+							aria-labelledby="exampleModalLabel" aria-hidden="true">
+							<div class="modal-dialog">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title" id="exampleModalLabel">Add your
+											product here</h5>
+										<button type="button" class="btn-close"
+											data-bs-dismiss="modal" aria-label="Close"></button>
+									</div>
+									<div class="modal-body">
+										<form>
+											<div class="mb-3">
+												<label for="recipient-name" class="col-form-label">Enter
+													product Name:</label> <input type="text" class="form-control"
+													id="name" aria-describedby="emailHelp" name="productName">
+											</div>
+											<div class="mb-3">
+												<label for="message-text" class="col-form-label">Enter
+													Description:</label> <input type="text" class="form-control"
+													id="desr" aria-describedby="emailHelp" name="description">
+											</div>
+											<di-v class="mb-3"> <label for="message-text"
+												class="col-form-label">Price:</label> <input type="number"
+												class="form-control" id="price" aria-describedby="emailHelp"
+												name="price">
+									</div>
+									<div class="mb-3">
+										<label for="message-text" class="col-form-label">Quantity:</label>
+										<input type="number" class="form-control" id="qty"
+											aria-describedby="emailHelp" name="quantity">
+									</div>
+
+									<div class="modal-footer">
+										<button type="button" class="btn btn-danger"
+											data-bs-dismiss="modal">Close</button>
+										<button type="submit" class="btn btn-primary"
+											onclick="addProducts();">Add products</button>
+
+
+										<!--onclick use   -->
+
+
+									</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+
+				<div class="card-body">
+
+
+
+
+					<table class="table table-bordered">
+
+						<thead>
+
+							<tr>
+								<form id='refresh'>
+
+									<th>id</th>
+									<th>Name</th>
+									<th>Description</th>
+									<th>price</th>
+									<th>quantity</th>
+									<th>Action</th>
+
+								</form>
+							</tr>
+
+						</thead>
+
+						<tbody id="mytable">
+
+						</tbody>
+					</table>
+
+				</div>
+
+
+
+
+				<!-- bootstrap Model for edit  -->
+
+				<div class="modal fade" id="gbccc" tabindex="-1"
+					aria-labelledby="exampleModalLabel" aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="exampleModalLabel">Edit your
+									product here</h5>
+								<button type="button" class="btn-close" data-bs-dismiss="modal"
+									aria-label="Close"></button>
+							</div>
+							<div class="modal-body">
+								<form>
+									<div class="mb-3">
+										<label for="recipient-name" class="col-form-label">Enter
+											product Name:</label> <input type="text" class="form-control"
+											id="name1" aria-describedby="emailHelp" name="productName">
+										<input type="hidden" class="form-control" id="g1"
+											aria-describedby="emailHelp" name="id">
+									</div>
+									<div class="mb-3">
+										<label for="message-text" class="col-form-label">Enter
+											Description:</label> <input type="text" class="form-control"
+											id="desr2" aria-describedby="emailHelp" name="description">
+									</div>
+									<div class="mb-3">
+										<label for="message-text" class="col-form-label">Price:</label>
+										<input type="number" class="form-control" id="price3"
+											aria-describedby="emailHelp" name="price">
+									</div>
+									<div class="mb-3">
+										<label for="message-text" class="col-form-label">Quantity:</label>
+										<input type="number" class="form-control" id="qty4"
+											aria-describedby="emailHelp" name="quantity">
+									</div>
+
+									<div class="modal-footer">
+										<button type="button" class="btn btn-danger"
+											data-bs-dismiss="modal">Close</button>
+										<button type="submit" class="btn btn-primary"
+											onclick="update();">submit</button>
+
+									</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<script
+					src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+					integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+					crossorigin="anonymous">
+    </script>
+
+				<script type="text/javascript">
+	
+	    function getdata()
+	    {
+	    
+	         $.ajax
+	            ({
+	                type:"ajax",
+	                method:'GET',
+	                url:"/feth-all-std-list",
+	                data:{},
+	                async:false,
+	                dataType:'json',
+	                
+	                success:function (data)
+	                    {
+	                         console.log(data);
+	                         
+	                         var a="";
+	                         
+	                         for(i=0; i<data.length;i++)
+	                          {
+	                             a += '<tr>' +
+	                                  '<td>' + data[i].id + '</td>' +
+	                                  '<td>' + data[i].productName + '</td>' +
+	                                  '<td>' + data[i].description + '</td>' +
+	                                  '<td>' + data[i].price + '</td>' +
+	                                  '<td>' + data[i].quantity + '</td>'+
+	                                  '<td>' + '<a id="' +data[i].id +'" class="btn btn-sm btn-primary editbtn" data-bs-toggle="modal" data-bs-target="#gbccc" onclick="edit(this.id) ;"th:id="${p.id}"> Edit+ </a> <a id="'+ data[i].id +'" class="btn btn-sm btn-danger deletebtn" onclick="deleteData(this.id);">delete </a>' +'</td>'+
+	                                  '</tr>';
+	                                     
+	                          } 
+	                          
+	                          $("#mytable").html(a);
+	                    },
+	                    
+	                  error: function (){
+	                   alert('data insert failed')
+	                  }
+	                
+	             
+	         
+	            });
+	    };
+		
+		function addProducts()
+         {
+		
+		
+		  var a=   document.getElementById('name').value;
+		     
+		// alert(a)
+		  var b=   document.getElementById('desr').value;
+		  
+		//  alert(b)
+		  
+		  var c=   document.getElementById('price').value;
+		  
+		//  alert(c)
+		  var d=   document.getElementById('qty').value;
+		  
+		//  alert(d)
+		  
+		  alert(a+"  "+b+"  "+c+"  "+d)
+		
+		 $.ajax({
+	    
+	     method : "GET",
+	     data: {productName:a,description:b,price:c,quantity:d},
+	     url:'/save_products',
+	     
+	     success:function(data) {
+	     
+	     alert('success')
+	     
+	     window.location.reload();
+	     
+	     
+	     
+	     }, 
+	     
+	     error:function() {alert('error')},
+		
+		      });  
+		};
+		
+		
+		
+		function deleteData(id){
+				
+		$.ajax({
+		method:"GET",
+		data:{id:id},
+		url:"/delete",	
+		
+		success:function(data){  
+		
+		
+		 alert('deleted')
+		 
+		 window.location.reload();
+		 }	,
+		});
+		};
+		
+		
+		
+		function update(){
+		
+		 var e=document.getElementById('g1').value;
+		var a=   document.getElementById('name1').value;
+		     
+		
+		  var b=   document.getElementById('desr2').value;
+		  
+		
+		  
+		  var c=   document.getElementById('price3').value;
+		  
+		
+		  var d=   document.getElementById('qty4').value;
+		  
+		 $.ajax({
+		 
+		 method:"GET",
+		 data:{id:e,productName:a,description:b,price:c,quantity:d},
+		 url:'/update_products',
+		 
+		 success:function(data){
+		 
+		    alert('update')
+		 
+		 },
+		 
+		 });
+		
+		
+		};
+		
+		
+		function edit(id){
+		var id=id;
+		
+	
+	
+		$.ajax({
+		method:"GET",
+		data:{id:id},
+		url:'/edit_form',	
+		
+		success:function(data){ 
+		 
+		 $('#g1').val(data.id);
+		
+		 $('#name1').val(data.productName);
+		 $('#desr2').val(data.description);
+		  $('#price3').val(data.price);
+		  $('#qty4').val(data.quantity);
+		 
+		 
+		 }	,
+		});
+		
+		
+		};
+		</script>
+</body>
+</html>
