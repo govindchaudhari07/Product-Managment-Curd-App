@@ -15,16 +15,22 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.product.entity.Products;
 import com.product.service.ProductService;
 
-@Controller
+@RestController
 public class HomeController {
 
 	@Autowired
 	ProductService productServ;
 
+	@GetMapping("/Springstart")
+	public String welcome()
+	{
+		return "welcome hi ";
+	}
 	@RequestMapping("/home")
 
 	public String home(Model m) {
