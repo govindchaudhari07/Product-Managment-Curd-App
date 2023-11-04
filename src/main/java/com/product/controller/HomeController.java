@@ -26,10 +26,10 @@ public class HomeController {
 	@Autowired
 	ProductService productServ;
 
-	@GetMapping("/springstart")
-	public String welcome()
+	@GetMapping("/welcome/{name}")
+	public String welcome(@PathVariable("name") String name)
 	{
-		return "welcome hi ";
+		return name+"welcome hi ";
 	}
 	@RequestMapping("/home")
 
